@@ -1,0 +1,14 @@
+<section class="detailsOtherPet">
+	{{#each pet}}
+		<h3>{{name}}</h3>
+		<p>Pet counter: {{likes}} <a href="#/pets/like?petId={{_id}}&name={{name}}&likes={{likes}}
+			&imageURL={{imageURL}}&category={{category}}&description={{description}}">
+			<button class="button"><i class="fas fa-heart"></i>
+				Pet
+			</button>
+		</a>
+		</p>
+		<p class="img"><img src="{{imageURL}}"></p>
+		<p class="description">{{description}}</p>
+	{{/each}}
+</section>

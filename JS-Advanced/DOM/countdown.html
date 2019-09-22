@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+<input type="text" id="time" style="border:3px solid blue; text-align:center;
+font-size:2em;" disabled="true"/>
+<script>
+    window.onload = function () {
+        countdown(600);
+
+        function countdown(seconds) {
+            let startMins = 9;
+            let startSeconds = 59;
+
+            document.getElementById("time").disabled = false;
+
+            setInterval(() => {
+                document.getElementById("time").value =
+                    startMins +
+                    ":" +
+                    (startSeconds.toString().length === 2 ? startSeconds : "0" + startSeconds);
+
+                if (startSeconds === 0) {
+                    startMins -= 1;
+                    startSeconds = 60;
+                }
+                startSeconds--;
+
+            }, 1000);
+        }
+    }
+
+    // function countdown(seconds) {
+    //     let startMins = 10;
+    //     let startSeconds = 0;
+	//
+    //     document.getElementById("time").disabled = false;
+	//
+    //     setInterval(() => {
+    //         document.getElementById("time").value =
+    //             (startMins.toString().length === 2 ? startMins : "0" + startMins) +
+    //             ":" +
+    //             (startSeconds.toString().length === 2 ? startSeconds : "0" + startSeconds);
+	//
+    //         if (startSeconds === 0) {
+    //             startMins -= 1;
+    //             startSeconds = 60;
+    //         }
+    //         startSeconds--;
+	//
+    //     }, 1000);
+    // }
+</script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Timer</title>
+	<script src="https://code.jquery.com/jquery-3.1.0.min.js"
+	        integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="
+	        crossorigin="anonymous"></script>
+	<style>
+		#timer {
+			font-size: 5em;
+		}
+	</style>
+</head>
+<body>
+<div id="timer">
+	<span id="hours" class="timer">00</span>:
+	<span id="minutes" class="timer">00</span>:
+	<span id="seconds" class="timer">00</span>
+	<button id="start-timer">Start</button>
+	<button id="stop-timer">Stop</button>
+</div>
+<script>
+    window.onload = function () {
+        timer();
+    };
+
+    function timer() {
+        $("#start-timer").on("click", (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+
+            timer();
+        });
+
+        $("#stop-timer").on("click", (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            debugger;
+
+            clearInterval(timer);
+        });
+
+        let timer = setInterval(step, 1000);
+
+        function step() {
+            let $hours = $("#hours");
+            let $minutes = $("#minutes");
+            let $seconds = $("#seconds");
+
+            if (+$seconds.text() === 59) {
+                $seconds.text('00');
+
+                if (+$minutes.text() === 59) {
+                    $minutes.text('00');
+                    $hours.text(('0' + (+$hours.text() + 1)).slice(-2));
+                } else {
+                    $minutes.text(('0' + (+$minutes.text() + 1)).slice(-2));
+                }
+            } else {
+                $seconds.text(('0' + (+$seconds.text() + 1)).slice(-2));
+            }
+
+        }
+    }
+</script>
+</body>
+</html>

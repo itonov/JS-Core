@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Countries Table</title>
+	<style>
+		td, th {
+			background: #DDD;
+			padding: 5px 10px
+		}
+
+		input[type='text'] {
+			width: 60px
+		}
+
+		a {
+			margin-left: 5px
+		}
+	</style>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"
+	        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+</head>
+<body>
+<table id="countriesTable">
+	<tr>
+		<th>Country</th>
+		<th>Capital</th>
+		<th>Action</th>
+	</tr>
+	<tr>
+		<td><input type="text" id="newCountryText"/></td>
+		<td><input type="text" id="newCapitalText"/></td>
+		<td><a href="#" id="createLink">[Create]</a></td>
+	</tr>
+</table>
+<script>$(() => initializeTable());
+
+function initializeTable() {
+    $("#createLink").on("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const country = $("#newCountryText").val();
+        const capital = $("#newCapitalText").val();
+
+        $("#countriesTable").append(`<tr>
+			<td>${country}</td>
+			<td>${capital}</td>
+			<td>
+				<a href="#">Up</a>
+				<a href="#">Down</a>
+				<a href="#">Delete</a>
+			</td>
+			</tr>`
+        );
+
+        const $tr = $("#countriesTable tr:last-child");
+
+        addDelete($tr);
+        addUp($tr);
+        addDown($tr);
+    });
+
+    function addDelete($tr) {
+	    $("#countriesTable tr:last-child td:last-child a:last-child").on("click", (event) => {
+	        event.preventDefault();
+	        event.stopPropagation();
+
+	        $tr.remove();
+	    });
+    }
+
+    function addUp($tr) {
+	    $("#countriesTable tr:last-child td:last-child").children().first().on("click", (event) => {
+	        event.preventDefault();
+	        event.stopPropagation();
+
+	        const currentIndex = $("#countriesTable tr").index($tr);
+	        const $table = $("#countriesTable tbody");
+
+            $table.children()[currentIndex].remove();
+            $tr.insertAfter($table.children()[currentIndex - 2]);
+
+	    });
+    }
+
+    function addDown($tr) {
+        let $a = $("#countriesTable tr:last-child td:last-child").children()[1];
+        $($a).on("click", (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+
+            const currentIndex = $("#countriesTable tr").index($tr);
+            const $table = $("#countriesTable tbody");
+
+            $table.children()[currentIndex].remove();
+            $tr.insertBefore($table.children()[currentIndex + 1]);
+
+        });
+    }
+}
+</script>
+</body>
+</html>

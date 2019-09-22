@@ -1,0 +1,13 @@
+<section class="detailsMyPet">
+	{{#each pet}}
+		<h3>{{name}}</h3>
+		<p>Pet counter: <i class="fas fa-heart"></i> {{likes}}</p>
+		<p class="img"><img src="{{imageURL}}">
+		</p>
+		<form action="#/pets/edit?petId={{_id}}&name={{name}}&likes={{likes}}
+		&imageURL={{imageURL}}&category={{category}}" method="POST">
+		<textarea type="text" name="description">{{description}}</textarea>
+		<button class="button"> Save</button>
+		</form>
+	{{/each}}
+</section>

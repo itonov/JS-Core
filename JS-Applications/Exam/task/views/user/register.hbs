@@ -1,0 +1,46 @@
+<section class="register">
+	<form action="#/register" method="post" id="formRegister">
+		<fieldset>
+			<legend>Register</legend>
+			<p class="field">
+				<label for="username">Username</label>
+				<span class="input">
+                                <input type="text" name="username" id="username" placeholder="Username"/>
+                                <span class="actions"></span>
+                                <i class="fas fa-user"></i>
+                            </span>
+			</p>
+			<p class="field">
+				<label for="password">Password</label>
+				<span class="input">
+                                <input type="password" name="password" id="password" placeholder="Password"/>
+                                <span class="actions"></span>
+                                <i class="fas fa-key"></i>
+                            </span>
+			</p>
+			<input class="button" type="submit" class="submit" value="Register"/>
+		</fieldset>
+	</form>
+</section>
+<script>
+	$(function () {
+		$("#formRegister").on('submit', function (ev) {
+			let isValid = true;
+
+			if ($("input[name='username']").val().length < 3) {
+				isValid = false;
+				notification().error("Username must be at least 3 symbols");
+			}
+
+			if ($("input[name='password']").val().length < 6) {
+				isValid = false;
+				notification().error("Password must be at least 6 symbols");
+			}
+
+			if (!isValid) {
+				ev.preventDefault();
+				ev.stopPropagation();
+			}
+		});
+	})
+</script>
